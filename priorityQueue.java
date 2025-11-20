@@ -1,5 +1,7 @@
+import java.util.Scanner;
+
 public class priorityQueue{
-  public int printMenu(){
+  public static int printMenu(){
     Scanner input = new Scanner(System.in);
 
     System.out.println("Type a choice from the menu:");
@@ -12,6 +14,7 @@ public class priorityQueue{
     System.out.println("5)  Clear the queue of all elements.");
     System.out.println("6)  Return the number of tasks in the queue.");
     System.out.println("7)  Determine if the queue is empty.");
+    System.out.println();
 
     int response = input.nextInt();
 
