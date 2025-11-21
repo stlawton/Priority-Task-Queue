@@ -31,6 +31,8 @@ public class pqTest{
     public static void main(String[] args){
     int output = printMenu();
 
+    priorityQueue taskQueue = new priorityQueue();
+
     System.out.println("User input was: " + output);
 
 
@@ -38,7 +40,15 @@ public class pqTest{
 }
 
 class priorityQueue{
-  Job[] taskList = new Job[10];
+
+  private Job[] taskList;
+  private int size;
+  private int CAPACTIY = 10;
+
+  public priorityQueue{
+    taskList = new Job[10];
+     
+  }
 
 }
 
