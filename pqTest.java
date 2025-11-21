@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class pqTest{
   public static int printMenu(){
@@ -31,13 +32,17 @@ public class pqTest{
 }
 
 class priorityQueue{
-  
 
 }
 
 class Job{
   private int priority;
   private String taskName;
+
+  public Job(int val, String tName){
+    priority = val;
+    taskName = tName;
+  }
   
   public int getPriority(){
     return priority;
