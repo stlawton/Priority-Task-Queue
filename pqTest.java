@@ -57,7 +57,7 @@ public class pqTest{
           System.out.println();
         }
         else if (output ==3){
-          System.out.println("The highest priority task is: " + taskQueue.peek());
+          System.out.println(taskQueue.peek());
           System.out.println();
         }
         else if (output == 4){
@@ -107,7 +107,7 @@ class priorityQueue{
 
   private void upheap(int k){
     Job v = taskList[k];
-    while (taskList[k/2].getPriority() >= v.getPriority()){
+    while (k> 1 && taskList[k/2].getPriority() >= v.getPriority()){
       taskList[k] = taskList[k/2];
       k = k/2;
     }
@@ -155,7 +155,7 @@ class priorityQueue{
   public String peek(){
     if (isEmpty())
       return "There are no tasks in the list.";
-    return taskList[1].getTaskName();
+    return "The highest priority task is: " + taskList[1].getTaskName();
   }
 
   public int peekPriority(){
