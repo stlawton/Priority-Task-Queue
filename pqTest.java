@@ -26,6 +26,7 @@ public class pqTest{
     System.out.println();                                                     //Print blank line for visual
 
     int response = input.nextInt();                                           //Initialize variable to hold user input
+    input.nextLine();
 
     return response;                                                          //Return user input as integer
   }
@@ -36,35 +37,57 @@ public class pqTest{
 
     priorityQueue taskQueue = new priorityQueue();
 
-    if (output > 7 || output < 0)
+    if (output > 7 || output < 0){
       System.out.println("Invlaid integer input. Please select a number from the menu (0 - 7).");
-
+      System.out.println();
+    }
     else{
       while (output != 0){
         if (output == 1){
           System.out.println("What is the task name?");
-          String newTaskName = input.next();
+          String newTaskName = input.nextLine();
           System.out.println("What is the task priority on a scale of 1-5? (1 is higest priority, 5 is lowest)");
           int newPriority = input.nextInt();
+          input.nextLine();
+          System.out.println();
           taskQueue.enqueue(newTaskName, newPriority);
         }
         else if(output == 2){
-
+          System.out.println("Task being removed is: " + taskQueue.dequeue());
+          System.out.println();
         }
         else if (output ==3){
-          System.out.println(taskQueue.peek());
+          System.out.println("The highest priority task is: " + taskQueue.peek());
+          System.out.println();
         }
-        else if (output ==4){
-
+        else if (output == 4){
+          if (taskQueue.peekPriority() == -1)
+            System.out.println("There are no tasks in the list.");
+          else
+            System.out.println("The highest priority task has priority: " + taskQueue.peekPriority());
+          System.out.println();
+        }
+        else if (output == 5){
+          taskQueue.clear();
+        }
+        else if (output == 6){
+          if (taskQueue.size() == 1)
+            System.out.println("There is " + taskQueue.size() + " task in the list.");
+          else
+            System.out.println("There are " + taskQueue.size() + " tasks in the list.");
+          System.out.println();
+        }
+        else if (output == 7){
+          if (taskQueue.isEmpty())
+            System.out.println("The task list is empty.");
+          else
+            System.out.println("The task list is not empty.");
+          System.out.println();
         }
 
         output = printMenu();
       }
     }
-
-
-    System.out.println("User input was: " + output);
-
 
   }
 }
@@ -78,31 +101,82 @@ class priorityQueue{
   public priorityQueue(){
     taskList = new Job[CAPACTIY+1];
     size = 0;
+    Job sentinel = new Job(Integer.MAX_VALUE, "Sentinel Value");
+    taskList[0] = sentinel;
   }
-/* 
-  public void upHeap(int k){
-    int v;
-    v = taskList[k].getPriority(); taskList[0].getPriority() = intMax; //intMax is a sentinel
-    while (a[k/2] <= v){
-      a[k] = a[k/2];
+
+  private void upheap(int k){
+    Job v = taskList[k];
+    while (taskList[k/2].getPriority() >= v.getPriority()){
+      taskList[k] = taskList[k/2];
       k = k/2;
     }
-    a[k] = v;
+    taskList[k] = v;
   }
-*/
 
+  private void downheap(int k){
+    int j;
+    Job v = taskList[k];
+    while(k <= size/2){
+      j = k + k;
+      if(j < size && taskList[j].getPriority() > taskList[j+1].getPriority())
+        j++;
+      if (v.getPriority() <= taskList[j].getPriority())
+        break;
+      taskList[k] = taskList[j];
+      k = j;
+    }
+    taskList[k] = v;
+  }
 
   public void enqueue(String tName, int val){
+    if (size == CAPACTIY){
+      System.out.println("Task list is full. Cannot enqueue " + tName);
+      System.out.println();
+      return;
+    }
+    
     Job newTask = new Job(val, tName);
     size++;
     taskList[size] = newTask;
+    upheap(size);
+  }
 
+  public String dequeue(){
+    if(isEmpty()){
+      return "Task list is empty, cannot dequeue.";
+    }
+    Job t = taskList[1];
+    taskList[1] = taskList[size-1];
+    downheap(1);
+    return t.getTaskName();
   }
 
   public String peek(){
+    if (isEmpty())
+      return "There are no tasks in the list.";
     return taskList[1].getTaskName();
   }
 
+  public int peekPriority(){
+    if (isEmpty())
+      return -1;
+    return taskList[1].getPriority();
+  }
+
+  public void clear(){
+    size = 0;
+    System.out.println("Task list has been cleared.");
+    System.out.println();
+  }
+
+  public int size(){
+    return size;
+  }
+
+  public boolean isEmpty(){
+    return size == 0;
+  }
 }
 
 class Job{
