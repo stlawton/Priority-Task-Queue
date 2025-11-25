@@ -1,21 +1,20 @@
 import java.util.Scanner;
 
 public class pqTest{
-//This class contains the main method for the code as well at the printMenu method to prompt and return user input. The menu gives
-//the user all of the options they have for editing the task list in the printMenu method. The main method calls the printMenu
-//method as well as the priorityQueue class. 
+//This class contains the main method for the code as well at the printMenu method to prompt and return user input.
+//The menu gives the user the options they have for editing the task list in the printMenu method. The main method calls
+//the printMenu method as well as the priorityQueue class.
 
-  static Scanner input = new Scanner(System.in); //Initialize Scanner opbject for user input
+  static Scanner input = new Scanner(System.in); //Initialize Scanner object for user input
 
   public static int printMenu(){
-  //This method contains the scanner object to hold user input. It also prints the menu to prompt the user for input. Once the user has
-  //chosen a menu option they input the matching integer. That integer is then returned by the method for use by the main method.
+  //This method contains the scanner object to hold user input. It also prints the menu to prompt the user for input.
+  //Once the user has chosen a menu option they input the matching integer. That integer is then returned by the method
+  //for use by the main method.
 
-
-
-    System.out.println("Type a choice from the menu:");                    //Print the menu instructions
-    System.out.println();                                                     //Blank line to imporve visual
-    System.out.println("0)  EXIT the program.");                           //Print option 1
+    System.out.println("Type a choice from the menu:");                     //Print the menu instructions
+    System.out.println();                                                   //Blank line to improve visual
+    System.out.println("0)  EXIT the program.");                            //Print option 1
     System.out.println("1)  Enqueue a task.");                              //Print option 2
     System.out.println("2)  Dequeue a task.");                              //Print Option 3
     System.out.println("3)  Peek at the most urgent task.");                //Print option 4
@@ -23,12 +22,12 @@ public class pqTest{
     System.out.println("5)  Clear the queue of all elements.");             //Print option 6
     System.out.println("6)  Return the number of tasks in the queue.");     //Print option 7
     System.out.println("7)  Determine if the queue is empty.");             //Print option 8
-    System.out.println();                                                     //Print blank line for visual
+    System.out.println();                                                   //Print blank line for visual
 
-    int response = input.nextInt();                                           //Initialize variable to hold user input
+    int response = input.nextInt();                                         //Initialize variable to hold user input
     input.nextLine();
 
-    return response;                                                          //Return user input as integer
+    return response;                                                        //Return user input as integer
   }
   
   public static void main(String[] args){
@@ -46,7 +45,7 @@ public class pqTest{
         if (output == 1){
           System.out.println("What is the task name?");
           String newTaskName = input.nextLine();
-          System.out.println("What is the task priority on a scale of 1-5? (1 is higest priority, 5 is lowest)");
+          System.out.println("What is the task priority on a scale of 1-5? (1 is highest priority, 5 is lowest)");
           int newPriority = input.nextInt();
           input.nextLine();
           System.out.println();
