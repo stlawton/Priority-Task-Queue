@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.Scanner; //Import scanner for to record user input. 
 
 public class pqTest{
 //This class contains the main method for the code as well at the printMenu method to prompt and return user input. The menu gives
@@ -32,63 +32,62 @@ public class pqTest{
   }
   
   public static void main(String[] args){
- 
-    int output = printMenu();
+  //This is the main method, which is where the priorityQueue object is created. It also is where the user input from the menu is
+  //processed using if-else statements. This method calls the priorityQueue methods to perfomr operations on the task list. It also
+  //calls the printMenu method to rpint the menu and record the user input. 
 
-    priorityQueue taskQueue = new priorityQueue();
+    int output = printMenu();                       //Calls printMenu methos and stores user input.
 
-    if (output > 7 || output < 0){
-      System.out.println("Invlaid integer input. Please select a number from the menu (0 - 7).");
-      System.out.println();
-    }
-    else{
-      while (output != 0){
-        if (output == 1){
-          System.out.println("What is the task name?");
-          String newTaskName = input.nextLine();
-          System.out.println("What is the task priority on a scale of 1-5? (1 is higest priority, 5 is lowest)");
-          int newPriority = input.nextInt();
-          input.nextLine();
-          System.out.println();
-          taskQueue.enqueue(newTaskName, newPriority);
-        }
-        else if(output == 2){
-          System.out.println("Task being removed is: " + taskQueue.dequeue());
-          System.out.println();
-        }
-        else if (output ==3){
-          System.out.println(taskQueue.peek());
-          System.out.println();
-        }
-        else if (output == 4){
-          if (taskQueue.peekPriority() == -1)
-            System.out.println("There are no tasks in the list.");
-          else
-            System.out.println("The highest priority task has priority: " + taskQueue.peekPriority());
-          System.out.println();
-        }
-        else if (output == 5){
-          taskQueue.clear();
-        }
-        else if (output == 6){
-          if (taskQueue.size() == 1)
-            System.out.println("There is " + taskQueue.size() + " task in the list.");
-          else
-            System.out.println("There are " + taskQueue.size() + " tasks in the list.");
-          System.out.println();
-        }
-        else if (output == 7){
-          if (taskQueue.isEmpty())
-            System.out.println("The task list is empty.");
-          else
-            System.out.println("The task list is not empty.");
-          System.out.println();
-        }
+    priorityQueue taskQueue = new priorityQueue();  //Create new task list object to hold tasks in an array.
 
-        output = printMenu();
+    while (output != 0){
+      if (output > 7 || output < 0){                  //If loop to check that integer input is within range. 
+        System.out.println("Invlaid integer input. Must be from 0 - 7."); //Return error message if integer is not valid. 
+        System.out.println();                         //Print blank line for visual
       }
-    }
+      if (output == 1){
+        System.out.print("Task name: ");             //Prompt user to enter task name
+        String newTaskName = input.nextLine();         //Store task name in variable
+        System.out.print("Task priority from 1(high) - 5(low): ");  //Prompt user for task priority.
+        int newPriority = input.nextInt();              //Store priority in variable. 
+        System.out.println();                           //Print blank line for visual.
+        taskQueue.enqueue(newTaskName, newPriority);    //Call enqueue method with user input as parameters. 
+      }
+      if(output == 2){
+        System.out.println(taskQueue.dequeue());
+        System.out.println();
+      }
+      if (output ==3){
+        System.out.println(taskQueue.peek());
+        System.out.println();
+      }
+      if (output == 4){
+        if (taskQueue.peekPriority() == -1)
+          System.out.println("There are no tasks in the list.");
+        else
+          System.out.println("The highest priority task has priority: " + taskQueue.peekPriority());
+        System.out.println();
+      }
+      if (output == 5){
+        taskQueue.clear();
+      }
+      if (output == 6){
+        if (taskQueue.size() == 1)
+          System.out.println("There is " + taskQueue.size() + " task in the list.");
+        else
+          System.out.println("There are " + taskQueue.size() + " tasks in the list.");
+        System.out.println();
+      }
+      if (output == 7){
+        if (taskQueue.isEmpty())
+          System.out.println("The task list is empty.");
+        else
+          System.out.println("The task list is not empty.");
+        System.out.println();
+      }
 
+      output = printMenu();
+    }
   }
 }
 
@@ -147,9 +146,10 @@ class priorityQueue{
       return "Task list is empty, cannot dequeue.";
     }
     Job t = taskList[1];
-    taskList[1] = taskList[size-1];
+    taskList[1] = taskList[size];
     downheap(1);
-    return t.getTaskName();
+    size--;
+    return "Task being removed is: " + t.getTaskName();
   }
 
   public String peek(){
