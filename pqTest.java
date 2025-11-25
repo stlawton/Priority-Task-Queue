@@ -25,7 +25,7 @@ public class pqTest{
     System.out.println();                                                   //Print blank line for visual
 
     int response = input.nextInt();                                         //Initialize variable to hold user input
-    input.nextLine();
+    input.nextLine();                                                       //Prevent accidental input for task name with newline character
 
     return response;                                                        //Return user input as integer
   }
@@ -47,46 +47,48 @@ public class pqTest{
       if (output == 1){
         System.out.print("Task name: ");             //Prompt user to enter task name
         String newTaskName = input.nextLine();         //Store task name in variable
-        System.out.print("Task priority from 1(high) - 5(low): ");  //Prompt user for task priority.
+        System.out.print("Task priority from 1(high) - 10(low): ");  //Prompt user for task priority.
         int newPriority = input.nextInt();              //Store priority in variable. 
         System.out.println();                           //Print blank line for visual.
         taskQueue.enqueue(newTaskName, newPriority);    //Call enqueue method with user input as parameters. 
       }
-      if(output == 2){
-        System.out.println(taskQueue.dequeue());
-        System.out.println();
+      if(output == 2){                                  //Check if input was 2 for dequeue
+        System.out.println(taskQueue.dequeue());        //Call the dequeue method and print
+        System.out.println();                           //Print blank line for clarity
       }
-      if (output ==3){
-        System.out.println(taskQueue.peek());
-        System.out.println();
+      if (output ==3){                                  //Check if input was 3 for peek
+        System.out.println(taskQueue.peek());           //Call peek method and print
+        System.out.println();                           //Print blank line for clarity
       }
-      if (output == 4){
-        if (taskQueue.peekPriority() == -1)
-          System.out.println("There are no tasks in the list.");
-        else
-          System.out.println("The highest priority task has priority: " + taskQueue.peekPriority());
-        System.out.println();
+      if (output == 4){                                 //Check if input was 4 for peek at priority
+        if (taskQueue.peekPriority() == -1)             //Check if priority is -1 indicating empy queue
+          System.out.println("There are no tasks in the list.");  //Print error message for empty queue
+        else                                                                                          //If queue is not empty
+          System.out.println("The highest priority task has priority: " + taskQueue.peekPriority());  //call peekPriority and print
+        System.out.println();                                                                         //Print blank line for clarity
       }
-      if (output == 5){
-        taskQueue.clear();
+      if (output == 5){                                                                   //Check if input was 5 for clear list
+        taskQueue.clear();                                                                //Call clear method
       }
-      if (output == 6){
+      if (output == 6){                                                                   //
         if (taskQueue.size() == 1)
           System.out.println("There is " + taskQueue.size() + " task in the list.");
         else
           System.out.println("There are " + taskQueue.size() + " tasks in the list.");
-        System.out.println();
+        System.out.println();                           //Print blank line for clarity
       }
       if (output == 7){
         if (taskQueue.isEmpty())
           System.out.println("The task list is empty.");
         else
           System.out.println("The task list is not empty.");
-        System.out.println();
+        System.out.println();                           //Print blank line for clarity
       }
 
       output = printMenu();
     }
+
+    input.close();
   }
 }
 
